@@ -1,0 +1,30 @@
+{
+  "name": "bajo-db-restapi",
+  "version": "0.1.0",
+  "description": "Bajo DB REST API Client driver for Bajo Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardhi/bajo-db-restapi.git"
+  },
+  "keywords": [
+    "restapi",
+    "db",
+    "driver",
+    "bajo",
+    "framework",
+    "modular"
+  ],
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ardhi/bajo-db-restapi/issues"
+  },
+  "homepage": "https://github.com/ardhi/bajo-db-restapi#readme",
+  "dependencies": {
+  }
+}
