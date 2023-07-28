@@ -4,7 +4,7 @@ async function createRecord ({ schema, body, options = {} } = {}) {
   const { fetch } = this.bajoExtra.helper
   const result = await buildFetch.call(this, { method: 'create', schema, body })
   const resp = await fetch(result.options)
-  const rec = result.dataKey ? resp[result.dataKey] : resp
+  const rec = result.key.data ? resp[result.key.data] : resp
   return { data: rec }
 }
 
