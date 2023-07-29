@@ -1,6 +1,6 @@
-import buildFetch from '../../lib/build-fetch.js'
+import buildFetch from '../../../lib/build-fetch.js'
 
-async function createRecord ({ schema, body, options = {} } = {}) {
+async function create ({ schema, body, options = {} } = {}) {
   const { fetch } = this.bajoExtra.helper
   const result = await buildFetch.call(this, { method: 'create', schema, body })
   const resp = await fetch(result.options)
@@ -8,4 +8,4 @@ async function createRecord ({ schema, body, options = {} } = {}) {
   return { data: rec }
 }
 
-export default createRecord
+export default create

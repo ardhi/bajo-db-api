@@ -1,6 +1,6 @@
-import buildFetch from '../../lib/build-fetch.js'
+import buildFetch from '../../../lib/build-fetch.js'
 
-async function findRecord ({ schema, filter = {}, options = {} } = {}) {
+async function find ({ schema, filter = {}, options = {} } = {}) {
   const { fetch } = this.bajoExtra.helper
   // const { prepPagination } = this.bajoDb.helper
   // const { limit, page, query, sort } = await prepPagination(filter, schema)
@@ -18,4 +18,4 @@ async function findRecord ({ schema, filter = {}, options = {} } = {}) {
   }
 }
 
-export default findRecord
+export default find

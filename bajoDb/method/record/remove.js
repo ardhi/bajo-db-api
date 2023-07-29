@@ -1,7 +1,7 @@
-import buildFetch from '../../lib/build-fetch.js'
-import getRecord from './get-record.js'
+import buildFetch from '../../../lib/build-fetch.js'
+import getRecord from './get.js'
 
-async function removeRecord ({ schema, id, options = {} } = {}) {
+async function remove ({ schema, id, options = {} } = {}) {
   const { fetch } = this.bajoExtra.helper
   const result = await buildFetch.call(this, { method: 'remove', schema, id })
   const old = await getRecord.call(this, { schema, id })
@@ -9,4 +9,4 @@ async function removeRecord ({ schema, id, options = {} } = {}) {
   return { old: old.data }
 }
 
-export default removeRecord
+export default remove
