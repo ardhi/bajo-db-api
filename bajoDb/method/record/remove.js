@@ -6,7 +6,7 @@ async function remove ({ schema, id, options = {} } = {}) {
   const result = await buildFetch.call(this, { method: 'remove', schema, id })
   const old = await getRecord.call(this, { schema, id })
   await fetch(result.options)
-  return { old: old.data }
+  return { oldData: old.data }
 }
 
 export default remove

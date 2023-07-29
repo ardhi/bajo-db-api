@@ -6,7 +6,7 @@ async function update ({ schema, id, body, options } = {}) {
   const old = await getRecord.call(this, { schema, id })
   const result = await buildFetch.call(this, { method: 'update', schema, body, id })
   const resp = await fetch(result.options)
-  return { old: old.data, new: result.key.data ? resp[result.key.data] : resp }
+  return { oldData: old.data, data: result.key.data ? resp[result.key.data] : resp }
 }
 
 export default update
