@@ -26,6 +26,7 @@ async function sanitizer (conn) {
     if (conn.auth.type === 'basic' && !(conn.auth.username && conn.auth.password)) fatal('\'%s@%s\' and \'%s@%s\' are both required', 'auth.username', 'auth.password', conn.name)
     result.auth = conn.auth
   }
+  // misc
   return result
 }
 
