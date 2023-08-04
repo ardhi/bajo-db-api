@@ -22,7 +22,7 @@ async function generic (conn) {
       if (!conn.url.base.startsWith('http')) fatal('Base url must starts with \'http\' protocol', conn.name)
       conn.url.base = trimEnd(conn.url.base, '/')
       conn.url[k] = trimStart(conn.url[k], '/')
-      conn.url[k] = `${conn.url.base}{collName}${(conn.url[k] === '' ? '' : ('/' + conn.url[k]))}`
+      conn.url[k] = `${conn.url.base}{repoName}${(conn.url[k] === '' ? '' : ('/' + conn.url[k]))}`
     }
   })
   if (!conn.idPattern) conn.idPattern = '{id}'
