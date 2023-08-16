@@ -5,7 +5,7 @@ async function count ({ schema, filter = {}, options = {} } = {}) {
   const build = await buildFetch.call(this, { method: 'find', schema })
   const resp = await fetch(build.options)
   return {
-    data: resp[build.key.count] || 0
+    data: resp[build.key.count] ?? 0
   }
 }
 

@@ -3,7 +3,7 @@ async function bajo (conn) {
   const { pick, each } = await importPkg('lodash-es')
 
   if (!conn.url) fatal('\'%s@%s\' key is required', 'url', conn.name)
-  conn.disabled = conn.disabled || []
+  conn.disabled = conn.disabled ?? []
   if (conn.readonly) conn.disabled = ['create', 'update', 'remove']
   const urls = {}
   each(['create', 'find', 'get', 'update', 'remove'], m => {
