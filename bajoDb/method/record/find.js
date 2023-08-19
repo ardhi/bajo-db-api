@@ -5,7 +5,7 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   // const { prepPagination } = this.bajoDb.helper
   // const { limit, page, query, sort } = await prepPagination(filter, schema)
   const build = await buildFetch.call(this, { method: 'find', schema })
-  // const criteria = query ? query.toJSON() : {}
+  // const criteria = query ?? {}
   // TODO: send query
   const resp = await fetch(build.options)
   const results = build.key.data ? resp[build.key.data] : resp
