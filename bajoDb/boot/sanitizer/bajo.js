@@ -7,7 +7,7 @@ async function bajo (conn) {
   if (conn.readonly) conn.disabled = ['create', 'update', 'remove']
   const urls = {}
   each(['create', 'find', 'get', 'update', 'remove'], m => {
-    let url = conn.disabled.includes(m) ? false : `${conn.url}{repoName}`
+    let url = conn.disabled.includes(m) ? false : `${conn.url}{collName}`
     if (url && ['get', 'update', 'remove'].includes(m)) url += '/{id}'
     urls[m] = url
   })
