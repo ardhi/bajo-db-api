@@ -2,10 +2,10 @@ import path from 'path'
 
 const subTypes = {}
 
-async function sanitizer (conn) {
+async function connSanitizer (conn) {
   const { importPkg, currentLoc, importModule, fatal } = this.bajo.helper
   const fastGlob = await importPkg('fast-glob')
-  const files = await fastGlob(`${currentLoc(import.meta).dir}/sanitizer/*.js`)
+  const files = await fastGlob(`${currentLoc(import.meta).dir}/sub-type/*.js`)
   for (const f of files) {
     const base = path.basename(f, '.js')
     if (subTypes[base]) continue
@@ -30,4 +30,4 @@ async function sanitizer (conn) {
   return result
 }
 
-export default sanitizer
+export default connSanitizer
