@@ -1,6 +1,6 @@
 async function bajo (conn) {
-  const { importPkg, fatal } = this.bajo.helper
-  const { pick, each } = await importPkg('lodash-es')
+  const { fatal } = this.bajo.helper
+  const { pick, each } = this.bajo.helper._
 
   if (!conn.url) fatal('\'%s@%s\' key is required', 'url', conn.name)
   conn.disabled = conn.disabled ?? []

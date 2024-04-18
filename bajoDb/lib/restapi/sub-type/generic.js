@@ -1,6 +1,6 @@
 async function generic (conn) {
-  const { importPkg, fatal, isSet } = this.bajo.helper
-  const { pick, each, trimEnd, trimStart, isFunction, isString } = await importPkg('lodash-es')
+  const { fatal, isSet } = this.bajo.helper
+  const { pick, each, trimEnd, trimStart, isFunction, isString } = this.bajo.helper._
 
   if (!conn.url) fatal('\'%s@%s\' key is required', 'url', conn.name)
   if (isFunction(conn.url)) {

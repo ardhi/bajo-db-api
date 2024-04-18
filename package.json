@@ -1,6 +1,6 @@
 {
   "name": "bajo-db-restapi",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Bajo DB REST API Client driver for Bajo Framework",
   "main": "index.js",
   "scripts": {
