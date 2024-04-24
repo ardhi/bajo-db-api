@@ -3,7 +3,7 @@ import buildFetch from '../../../lib/build-fetch.js'
 async function find ({ schema, filter = {}, options = {} } = {}) {
   const { fetch } = this.bajoExtra.helper
   // const { prepPagination } = this.bajoDb.helper
-  // const { limit, page, query, sort } = await prepPagination(filter, schema)
+  // const { limit, page, sort } = await prepPagination(filter, schema)
   const build = await buildFetch.call(this, { method: 'find', schema })
   // const { dataOnly, noCount } = options
   // const criteria = query ?? {}
