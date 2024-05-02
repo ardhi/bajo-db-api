@@ -1,5 +1,5 @@
 async function clear ({ schema } = {}) {
-  return true
+  // do nothing
 }
 
 export default clear

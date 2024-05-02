@@ -1,12 +1,12 @@
-import buildFetch from '../../../lib/build-fetch.js'
-import getRecord from './get.js'
+import unsupported from '../../lib/unsupported.js'
 
 async function remove ({ schema, id, options = {} } = {}) {
-  const { fetch } = this.bajoExtra.helper
-  const result = await buildFetch.call(this, { method: 'remove', schema, id })
-  const old = await getRecord.call(this, { schema, id })
-  await fetch(result.options)
-  return { oldData: old.data }
+  const { importModule } = this.bajo.helper
+  const { getInfo } = this.bajoDb.helper
+  const { driver } = getInfo(schema)
+  const mod = await importModule(`bajoDbRestproxy:/bajoDb/lib/${driver.type}/record-remove.js`)
+  if (!mod) return unsupported()
+  return await mod.call(this, { schema, id, options })
 }
 
 export default remove

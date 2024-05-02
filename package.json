@@ -1,7 +1,7 @@
 {
-  "name": "bajo-db-restapi",
-  "version": "0.3.1",
-  "description": "Bajo DB REST API Client driver for Bajo Framework",
+  "name": "bajo-db-restproxy",
+  "version": "0.3.2",
+  "description": "Bajo DB REST Proxy Client driver for Bajo Framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,10 +9,10 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ardhi/bajo-db-restapi.git"
+    "url": "git+https://github.com/ardhi/bajo-db-restproxy.git"
   },
   "keywords": [
-    "restapi",
+    "restproxy",
     "db",
     "driver",
     "bajo",
@@ -22,9 +22,9 @@
   "author": "Ardhi Lukianto <ardhi@lukianto.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ardhi/bajo-db-restapi/issues"
+    "url": "https://github.com/ardhi/bajo-db-restproxy/issues"
   },
-  "homepage": "https://github.com/ardhi/bajo-db-restapi#readme",
+  "homepage": "https://github.com/ardhi/bajo-db-restproxy#readme",
   "dependencies": {
   }
 }

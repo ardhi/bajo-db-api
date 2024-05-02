@@ -1,11 +1,12 @@
-import buildFetch from '../../../lib/build-fetch.js'
+import unsupported from '../../lib/unsupported.js'
 
 async function create ({ schema, body, options = {} } = {}) {
-  const { fetch } = this.bajoExtra.helper
-  const result = await buildFetch.call(this, { method: 'create', schema, body })
-  const resp = await fetch(result.options)
-  const rec = result.key.data ? resp[result.key.data] : resp
-  return { data: rec }
+  const { importModule } = this.bajo.helper
+  const { getInfo } = this.bajoDb.helper
+  const { driver } = getInfo(schema)
+  const mod = await importModule(`bajoDbRestproxy:/bajoDb/lib/${driver.type}/record-create.js`)
+  if (!mod) return unsupported()
+  return await mod.call(this, { schema, body, options })
 }
 
 export default create

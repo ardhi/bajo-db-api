@@ -1,3 +1,4 @@
 {
+  "alias": "restproxy",
   "dependencies": ["bajo-db", "bajo-extra"]
 }
