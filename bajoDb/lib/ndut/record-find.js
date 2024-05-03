@@ -8,8 +8,6 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const { connection } = getInfo(schema)
   const cfg = connection.options ?? {}
   const { url, opts } = await prepFetch.call(this, schema, 'find')
-  if (options.count) opts.headers['X-Count'] = true
-  if (options.rels) opts.headers['X-Rels'] = options.rels
   opts.params = opts.params ?? {}
   for (const k in cfg.qsKey) {
     if (has(filter, k)) {

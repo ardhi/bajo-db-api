@@ -1,5 +1,4 @@
 import prepFetch from './_prep-fetch.js'
-import transform from '../transform.js'
 
 async function find ({ schema, filter = {}, options = {} } = {}) {
   const { get, has, isPlainObject } = this.bajo.helper._
@@ -9,7 +8,6 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const cfg = connection.options ?? {}
   const { url, opts } = await prepFetch.call(this, schema, 'find')
   if (options.count) opts.headers['X-Count'] = true
-  if (options.rels) opts.headers['X-Rels'] = options.rels
   opts.params = opts.params ?? {}
   for (const k in cfg.qsKey) {
     if (has(filter, k)) {
@@ -18,15 +16,13 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
     }
   }
   const resp = await fetch(url, opts)
-  const result = {
+  return {
     data: resp[get(cfg, 'responseKey.data')],
     page: resp[get(cfg, 'responseKey.page')],
     limit: resp[get(cfg, 'responseKey.limit')],
     count: resp[get(cfg, 'responseKey.count')],
     pages: resp[get(cfg, 'responseKey.pages')]
   }
-  result.data = await transform.call(this, result.data, schema)
-  return result
 }
 
 export default find

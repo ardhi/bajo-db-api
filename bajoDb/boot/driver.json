@@ -1,4 +1,4 @@
 {
-  "type": ["bajo", "ndut", "loopback", "meteor"],
+  "type": ["bajo", "ndut"],
   "driver": "restproxy"
 }
