@@ -1,4 +1,4 @@
 {
-  "type": ["bajo", "ndut"],
+  "type": ["bajo", "ndut", "json-server"],
   "driver": "restproxy"
 }

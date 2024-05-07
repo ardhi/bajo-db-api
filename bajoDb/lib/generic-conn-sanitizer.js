@@ -8,23 +8,35 @@ const defKeys = {
 async function connSanitizer (conn, keys) {
   if (!keys) keys = defKeys
   const { error, join } = this.bajo.helper
-  const { get, set, trimEnd, trimStart } = this.bajo.helper._
+  const { get, set, trimEnd, trimStart, isString, isPlainObject } = this.bajo.helper._
   conn.proxy = true
   conn.connection = conn.connection ?? {}
   conn.connection.url = conn.connection.url ?? {}
-  if (!conn.connection.url.base) throw error('Base url must be provided')
-  conn.connection.url.base = trimEnd(conn.connection.url.base.trim(), '/')
-  for (const method in methods) {
-    if (!conn.connection.url[method]) continue
-    let [m, u] = conn.connection.url[method].split(':').map(item => item.trim())
-    if (!u) {
-      u = m
-      m = methods[method]
+  if (isString(conn.connection.url)) {
+    const url = {
+      base: trimEnd(conn.connection.url),
+      find: 'GET:{collName}',
+      get: 'GET:{collName}/{id}',
+      create: 'POST:{collName}',
+      update: 'PUT:{collName}/{id}',
+      remove: 'DELETE:{collName}/{id}'
     }
-    u = trimStart(u, '/')
-    if (!u.includes('{collName}')) throw error('Url for \'%s\' must have a \'{collName}\' pattern', method)
-    if (['get', 'update', 'remove'].includes(method) && !u.includes('{id}')) throw error('Url for \'%s\' must have a \'{id}\' pattern', method)
-    conn.connection.url[method] = `${m}:${u}`
+    conn.connection.url = url
+  } else if (isPlainObject((conn.connection.url))) {
+    if (!conn.connection.url.base) throw error('Base url must be provided')
+    conn.connection.url.base = trimEnd(conn.connection.url.base.trim(), '/')
+    for (const method in methods) {
+      if (!conn.connection.url[method]) continue
+      let [m, u] = conn.connection.url[method].split(':').map(item => item.trim())
+      if (!u) {
+        u = m
+        m = methods[method]
+      }
+      u = trimStart(u, '/')
+      if (!u.includes('{collName}')) throw error('Url for \'%s\' must have a \'{collName}\' pattern', method)
+      if (['get', 'update', 'remove'].includes(method) && !u.includes('{id}')) throw error('Url for \'%s\' must have a \'{id}\' pattern', method)
+      conn.connection.url[method] = `${m}:${u}`
+    }
   }
 
   conn.connection.auth = conn.connection.auth ?? 'apiKey'

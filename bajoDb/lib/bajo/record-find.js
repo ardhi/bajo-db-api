@@ -4,8 +4,13 @@ import transform from '../transform.js'
 async function find ({ schema, filter = {}, options = {} } = {}) {
   const { get, has, isPlainObject } = this.bajo.helper._
   const { fetch } = this.bajoExtra.helper
-  const { getInfo } = this.bajoDb.helper
+  const { getInfo, prepPagination } = this.bajoDb.helper
   const { connection } = getInfo(schema)
+  const { limit, page, skip, sort } = prepPagination({ filter, schema, options })
+  filter.limit = limit
+  filter.page = page
+  filter.skip = skip
+  filter.sort = sort
   const cfg = connection.options ?? {}
   const { url, opts } = await prepFetch.call(this, schema, 'find')
   if (options.count) opts.headers['X-Count'] = true
