@@ -1,4 +1,4 @@
-import generic from '../generic-conn-sanitizer.js'
+import generic from '../../generic/conn-sanitizer.js'
 const keys = {
   qs: ['bbox', 'query:q', 'page', 'skip:offset', 'limit:pageSize', 'sort'],
   response: ['data', 'oldData', 'page', 'count:total', 'pages:totalPages']

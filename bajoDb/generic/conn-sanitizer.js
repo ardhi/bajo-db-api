@@ -61,6 +61,7 @@ async function connSanitizer (conn, keys) {
       set(conn.options, realKey, val)
     }
   }
+  conn.fieldsMap = conn.fieldsMap ?? {}
   if (Array.isArray(conn.fieldsMap)) {
     const map = {}
     for (const f of conn.fieldsMap) {
