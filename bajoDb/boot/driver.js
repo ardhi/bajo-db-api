@@ -1,7 +1,7 @@
 async function driver () {
   const { eachPlugins, readJson } = this.bajo.helper
   const { isString } = this.bajo.helper._
-  const type = ['bajo', 'ndut', 'json-server']
+  const type = ['bajo', 'custom']
   const driver = 'restproxy'
   await eachPlugins(async function ({ file, plugin }) {
     const cfg = readJson(file)

@@ -38,7 +38,6 @@ async function connSanitizer (conn, keys) {
       conn.connection.url[method] = `${m}:${u}`
     }
   }
-
   conn.connection.auth = conn.connection.auth ?? 'apiKey'
   if (conn.connection.auth !== false) {
     if (!authTypes.includes(conn.connection.auth)) throw error('Only support one of these: %s', join(authTypes))
