@@ -10,7 +10,7 @@ async function prepFetch (schema, action, id, body) {
   if (!conn.url[action]) throw error('Method \'%s@%s\' is disabled', action, schema.name)
   let [method, url] = conn.url[action].split(':')
   url = `${conn.url.base}/${url}`.replace('{collName}', schema.collName)
-  if (body) opts.data = await transform.call(this, body, schema, true)
+  if (body) opts.body = await transform.call(this, body, schema, true)
   if (id) url = url.replace('{id}', id)
   opts.method = method.toLowerCase()
   opts.headers = opts.headers ?? {}
