@@ -2,11 +2,11 @@ import unsupported from '../../generic/unsupported.js'
 import prepFetch from '../../generic/prep-fetch.js'
 import transform from '../../generic/transform.js'
 
-async function find ({ schema, filter = {}, options = {} } = {}) {
-  const { importModule } = this.bajo.helper
-  const { get, has, isPlainObject, invert, isFunction } = this.bajo.helper._
-  const { getInfo, prepPagination } = this.bajoDb.helper
-  const { fetch } = this.bajoExtra.helper
+async function recordFind ({ schema, filter = {}, options = {} } = {}) {
+  const { importModule } = this.app.bajo
+  const { get, has, isPlainObject, invert, isFunction } = this.app.bajo.lib._
+  const { getInfo, prepPagination } = this.app.bajoDb
+  const { fetch } = this.app.bajoExtra
   const { driver, connection } = getInfo(schema)
   const { dataOnly, qsKey, responseKey } = connection.options
   const prefix = driver.provider ? `${driver.provider}:/bajoDbRestproxy` : 'bajoDbRestproxy:/bajoDb'
@@ -23,7 +23,7 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   }
   filter.sort = newSort
   let resp
-  if (isFunction(mod)) ({ url, opts, ext, resp } = await mod.call(this, { url, opts, ext, schema, filter, options }))
+  if (isFunction(mod)) ({ url, opts, ext, resp } = await mod.call(this.app[driver.ns], { url, opts, ext, schema, filter, options }))
   for (const k in qsKey) {
     if (has(filter, k)) {
       const val = isPlainObject(filter[k]) ? JSON.stringify(filter[k]) : filter[k]
@@ -42,4 +42,4 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   return result
 }
 
-export default find
+export default recordFind

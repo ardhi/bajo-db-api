@@ -3,11 +3,11 @@ import prepFetch from '../../generic/prep-fetch.js'
 import transform from '../../generic/transform.js'
 import fetchGet from './get.js'
 
-async function update ({ schema, id, body, options } = {}) {
-  const { importModule } = this.bajo.helper
-  const { get, isFunction, merge } = this.bajo.helper._
-  const { fetch } = this.bajoExtra.helper
-  const { getInfo } = this.bajoDb.helper
+async function recordUpdate ({ schema, id, body, options } = {}) {
+  const { importModule } = this.app.bajo
+  const { get, isFunction, merge } = this.app.bajo.lib._
+  const { fetch } = this.app.bajoExtra
+  const { getInfo } = this.app.bajoDb
   const { driver, connection } = getInfo(schema)
   const { dataOnly, oldData, data, responseKey } = connection.options
   const prefix = driver.provider ? `${driver.provider}:/bajoDbRestproxy` : 'bajoDbRestproxy:/bajoDb'
@@ -16,7 +16,7 @@ async function update ({ schema, id, body, options } = {}) {
   let { url, opts, ext } = await prepFetch.call(this, schema, 'update', id, body)
   let resp
   let oldResp
-  if (isFunction(mod)) ({ url, opts, ext, resp } = await mod.call(this, { url, opts, ext, schema, id, body, options }))
+  if (isFunction(mod)) ({ url, opts, ext, resp } = await mod.call(this.app[driver.ns], { url, opts, ext, schema, id, body, options }))
   merge(options, { noTransform: true })
   if (oldData === false) oldResp = await fetchGet.call(this, { schema, id, options })
   if (!resp) resp = await fetch(url, opts, ext)
@@ -33,4 +33,4 @@ async function update ({ schema, id, body, options } = {}) {
   return result
 }
 
-export default update
+export default recordUpdate

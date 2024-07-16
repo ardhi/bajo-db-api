@@ -3,11 +3,11 @@ import prepFetch from '../../generic/prep-fetch.js'
 import transform from '../../generic/transform.js'
 import fetchGet from './get.js'
 
-async function remove ({ schema, id, options = {} } = {}) {
-  const { importModule } = this.bajo.helper
-  const { get, isFunction, merge } = this.bajo.helper._
-  const { fetch } = this.bajoExtra.helper
-  const { getInfo } = this.bajoDb.helper
+async function recordRemove ({ schema, id, options = {} } = {}) {
+  const { importModule } = this.app.bajo
+  const { get, isFunction, merge } = this.app.bajo.lib._
+  const { fetch } = this.app.bajoExtra
+  const { getInfo } = this.app.bajoDb
   const { driver, connection } = getInfo(schema)
   const { dataOnly, oldData, responseKey } = connection.options
   const prefix = driver.provider ? `${driver.provider}:/bajoDbRestproxy` : 'bajoDbRestproxy:/bajoDb'
@@ -15,7 +15,7 @@ async function remove ({ schema, id, options = {} } = {}) {
   if (!mod) return unsupported.call(this)
   let { url, opts, ext } = await prepFetch.call(this, schema, 'remove', id)
   let resp
-  if (isFunction(mod)) ({ url, opts, ext, resp } = await mod.call(this, { url, opts, ext, schema, id, options }))
+  if (isFunction(mod)) ({ url, opts, ext, resp } = await mod.call(this.app[driver.ns], { url, opts, ext, schema, id, options }))
   let oldResp
   merge(options, { noTransform: true })
   if (oldData === false) oldResp = await fetchGet.call(this, { schema, id, options })
@@ -30,4 +30,4 @@ async function remove ({ schema, id, options = {} } = {}) {
   return result
 }
 
-export default remove
+export default recordRemove

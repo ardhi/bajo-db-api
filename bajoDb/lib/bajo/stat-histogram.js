@@ -1,9 +1,9 @@
 import prepFetch from './_prep-fetch.js'
 
-async function find ({ schema, filter = {}, options = {} } = {}) {
-  const { get, has, isPlainObject } = this.bajo.helper._
-  const { fetch } = this.bajoExtra.helper
-  const { getInfo } = this.bajoDb.helper
+async function statHistogram ({ schema, filter = {}, options = {} } = {}) {
+  const { get, has, isPlainObject } = this.app.bajo.lib._
+  const { fetch } = this.app.bajoExtra
+  const { getInfo } = this.app.bajoDb
   const { connection } = getInfo(schema)
   const cfg = connection.options ?? {}
   const { url, opts } = await prepFetch.call(this, schema, 'find')
@@ -26,4 +26,4 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   }
 }
 
-export default find
+export default statHistogram

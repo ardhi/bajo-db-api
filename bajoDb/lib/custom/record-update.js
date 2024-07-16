@@ -1,7 +1,7 @@
 import factory from './_factory.js'
 
-async function update (params = {}) {
+async function recordUpdate (params = {}) {
   return await factory.call(this, 'update', params)
 }
 
-export default update
+export default recordUpdate

@@ -1,13 +1,12 @@
 import transform from './transform.js'
 
 async function prepFetch (schema, action, id, body) {
-  const { error } = this.bajo.helper
-  const { getInfo } = this.bajoDb.helper
+  const { getInfo } = this.app.bajoDb
   const { connection } = getInfo(schema)
   const conn = connection.connection
   const opts = conn.options ?? {}
   const ext = conn.extra ?? {}
-  if (!conn.url[action]) throw error('Method \'%s@%s\' is disabled', action, schema.name)
+  if (!conn.url[action]) throw this.error('Method \'%s@%s\' is disabled', action, schema.name)
   let [method, url] = conn.url[action].split(':')
   url = `${conn.url.base}/${url}`.replace('{collName}', schema.collName)
   if (body) opts.body = await transform.call(this, body, schema, true)

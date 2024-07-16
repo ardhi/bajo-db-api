@@ -1,5 +1,5 @@
-async function clear ({ schema } = {}) {
+async function collExists ({ schema } = {}) {
   return true
 }
 
-export default clear
+export default collExists

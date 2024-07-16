@@ -1,6 +1,6 @@
 {
   "name": "bajo-db-restproxy",
-  "version": "0.3.7",
+  "version": "1.0.0",
   "description": "Bajo DB REST Proxy Client driver for Bajo Framework",
   "main": "index.js",
   "scripts": {

@@ -1,4 +1,4 @@
-async function find ({ url, opts, schema, filter, options } = {}) {
+async function recordFind ({ url, opts, schema, filter, options } = {}) {
   if (options.count) opts.headers['X-Count'] = true
   if (options.rels) opts.headers['X-Rels'] = options.rels
   const sorts = []
@@ -10,4 +10,4 @@ async function find ({ url, opts, schema, filter, options } = {}) {
   return { url, opts }
 }
 
-export default find
+export default recordFind

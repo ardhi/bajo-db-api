@@ -1,7 +1,7 @@
 import factory from './_factory.js'
 
-async function create (params = {}) {
+async function recordCreate (params = {}) {
   return await factory.call(this, 'create', params)
 }
 
-export default create
+export default recordCreate

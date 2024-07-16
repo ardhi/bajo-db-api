@@ -1,7 +1,7 @@
 import factory from './_factory.js'
 
-async function get (params = {}) {
+async function recordGet (params = {}) {
   return await factory.call(this, 'get', params)
 }
 
-export default get
+export default recordGet
