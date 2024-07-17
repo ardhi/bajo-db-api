@@ -1,7 +1,7 @@
 import factory from './_factory.js'
 
-async function remove (params = {}) {
+async function recordRemove (params = {}) {
   return await factory.call(this, 'remove', params)
 }
 
-export default remove
+export default recordRemove
