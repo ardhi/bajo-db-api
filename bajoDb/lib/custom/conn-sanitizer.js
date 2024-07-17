@@ -1,10 +1,10 @@
 import generic from '../../generic/conn-sanitizer.js'
 
 async function connSanitizer (conn) {
-  const { callMethodOrHandler } = this.app.bajo
+  const { callHandler } = this.app.bajo
   let newConn = await generic.call(this, conn)
   const { connSanitizer } = newConn.handler ?? {}
-  if (connSanitizer) newConn = await callMethodOrHandler(connSanitizer, newConn)
+  if (connSanitizer) newConn = await callHandler(connSanitizer, newConn)
   return newConn
 }
 

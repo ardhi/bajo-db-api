@@ -10,14 +10,14 @@ function mapFields (data, conn, reverse) {
 }
 
 async function transform (data, schema, reverse) {
-  const { getInfo, callMethodOrHandler } = this.app.bajoDb
+  const { getInfo, callHandler } = this.app.bajoDb
   const { isString } = this.app.bajo.lib._
   const { connection } = getInfo(schema)
   const arr = Array.isArray(data)
   if (!arr) data = [data]
   for (const i in data) {
     let d = data[i]
-    if (isString(connection.transformer)) d = await callMethodOrHandler(connection.transformer, data, schema)
+    if (isString(connection.transformer)) d = await callHandler(connection.transformer, data, schema)
     data[i] = mapFields.call(this, d, connection, reverse)
   }
   return arr ? data : data[0]

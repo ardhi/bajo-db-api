@@ -1,6 +1,6 @@
 async function factory (action, params = {}) {
   let { url, opts, schema, body, options } = params
-  const { callMethodOrHandler } = this.app.bajo
+  const { callHandler } = this.app.bajo
   const { get, camelCase } = this.app.bajo.lib._
   const { getInfo } = this.app.bajoDb
   const { connection } = getInfo(schema)
@@ -8,8 +8,8 @@ async function factory (action, params = {}) {
   let resp
   const sanitizer = get(connection, `handler.${camelCase(`record ${action} sanitizer`)}`)
   const fetcher = get(connection, `handler.${camelCase(`record ${action} fetcher`)}`)
-  if (sanitizer) ({ url, opts } = await callMethodOrHandler(sanitizer, { url, opts, schema, body, options }))
-  if (fetcher) ({ url, opts } = await callMethodOrHandler(fetcher, { url, opts, schema, body, options }))
+  if (sanitizer) ({ url, opts } = await callHandler(sanitizer, { url, opts, schema, body, options }))
+  if (fetcher) ({ url, opts } = await callHandler(fetcher, { url, opts, schema, body, options }))
   return { url, opts, resp }
 }
 
