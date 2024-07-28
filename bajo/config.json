@@ -1,4 +1,0 @@
-{
-  "alias": "rpx",
-  "dependencies": ["bajo-db", "bajo-extra"]
-}
